@@ -4,7 +4,6 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -16,11 +15,9 @@ public class ShoppingCart {
     @Id
     private Long id;
     @OneToMany
-    @JoinTable(joinColumns = @JoinColumn(name = "shopping_cart_id"),
-            inverseJoinColumns = @JoinColumn(name = "ticket_id"))
     private List<Ticket> tickets;
-    @OneToOne
     @MapsId
+    @OneToOne
     @JoinColumn(name = "id")
     private User user;
 
@@ -53,7 +50,6 @@ public class ShoppingCart {
         return "ShoppingCart{"
                 + "id=" + id
                 + ", tickets=" + tickets
-                + ", user=" + user
-                + '}';
+                + ", user=" + user + '}';
     }
 }

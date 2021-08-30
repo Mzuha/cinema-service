@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -20,14 +19,12 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToMany
-    @JoinTable(joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "ticket_id"))
     private List<Ticket> tickets;
+    @Column(name = "order_time")
+    private LocalDateTime orderTime;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-    @Column(name = "order_time")
-    private LocalDateTime orderTime;
 
     public Long getId() {
         return id;
@@ -45,14 +42,6 @@ public class Order {
         this.tickets = tickets;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public LocalDateTime getOrderTime() {
         return orderTime;
     }
@@ -61,13 +50,20 @@ public class Order {
         this.orderTime = orderTime;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "Order{"
                 + "id=" + id
                 + ", tickets=" + tickets
-                + ", user=" + user
                 + ", orderTime=" + orderTime
-                + '}';
+                + ", user=" + user + '}';
     }
 }

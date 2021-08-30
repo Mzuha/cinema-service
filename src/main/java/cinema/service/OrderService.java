@@ -6,7 +6,7 @@ import cinema.model.User;
 import java.util.List;
 
 public interface OrderService {
-    Order completeOder(ShoppingCart shoppingCart);
+    Order completeOrder(ShoppingCart shoppingCart);
 
-    List<Order> getByUser(User user);
+    List<Order> getOrdersHistory(User user);
 }
